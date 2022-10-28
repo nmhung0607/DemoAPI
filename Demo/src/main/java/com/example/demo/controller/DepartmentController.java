@@ -52,12 +52,15 @@ public class DepartmentController extends BaseController {
 	}
 	@GetMapping(value = "/find/department")
 	public ResponseEntity<ResponseJson> findEachDepartment(
+			@RequestParam("id") long id ,
+			@RequestParam("is_delete") long is_delete,
 			@RequestParam(value = "name" , required = false) String name,
 			@RequestParam(value = "address" , required = false) String address,
-			@RequestParam(value = "code") long code,
-			@RequestParam("id" )long id) {
+			@RequestParam("status") long status,
+			@RequestParam("pageNumber") int pageNumber,
+			@RequestParam("pageSize") int pageSize) {
 		try {
-			List<Department> department = departmentService.layDanhSach(name, address, code,id);
+			List<Department> department = departmentService.getResult(id, is_delete, name, address, status , pageSize, pageNumber);
 			if (department != null) {
 				return createSuccessResponse(department, HttpStatus.OK);
 			}
@@ -67,10 +70,10 @@ public class DepartmentController extends BaseController {
 		return null;
 	}
 
-	@GetMapping(value = "/department/id")
-	public ResponseEntity<ResponseJson> findDepartment(@RequestParam("id") long id) {
+	@GetMapping(value = "/find/department/id")
+	public ResponseEntity<ResponseJson> findDepartment(@PathVariable("id") long id) {
 		try {
-			List<Department> department = departmentService.detailsDepartment(id);
+			List<Department> department = departmentService.getDepartment(id);
 			if (department != null) {
 				return createSuccessResponse(department, HttpStatus.OK);
 			}
@@ -80,10 +83,10 @@ public class DepartmentController extends BaseController {
 		return null;
 	}
 
-	@GetMapping(value = "/department/name")
+	@GetMapping(value = "/find/department/name")
 	public ResponseEntity<ResponseJson> findByTenDepartment(@RequestParam("name") String name) {
 		try {
-			List<Department> department=departmentService.detailsDepartmentByTen(name);
+			List<Department> department=departmentService.getDepartmentByTen(name);
 			if(department!=null) {
 				return createSuccessResponse(department, HttpStatus.OK);
 			}
@@ -93,10 +96,10 @@ public class DepartmentController extends BaseController {
 		}
 		return null;
 	}
-	@GetMapping(value = "/department/code")
-	public ResponseEntity<ResponseJson> findByCodeDepartment(@RequestParam("code") long code) {
+	@GetMapping(value = "/find/department/code")
+	public ResponseEntity<ResponseJson> findByCodeDepartment(@PathVariable("code") long code) {
 		try {
-			List<Department> department=departmentService.detailsDepartmentByCode(code);
+			List<Department> department=departmentService.getDepartmentByCode(code);
 			if(department!=null) {
 				return createSuccessResponse(department, HttpStatus.OK);
 			}
@@ -106,10 +109,10 @@ public class DepartmentController extends BaseController {
 		}
 		return null;
 	}
-	@GetMapping(value = "/department/address")
+	@GetMapping(value = "/find/department/address")
 	public ResponseEntity<ResponseJson> findByAddressDepartment(@RequestParam("address") String address) {
 		try {
-			List<Department> department=departmentService.detailsDepartmentByAddress(address);
+			List<Department> department=departmentService.getDepartmentByAddress(address);
 			if(department!=null) {
 				return createSuccessResponse(department, HttpStatus.OK);
 			}
@@ -128,7 +131,7 @@ public class DepartmentController extends BaseController {
 			if (depart != null) {
 				return createSuccessResponse(depart, HttpStatus.OK);
 			}
-		} catch (Exception ex) {
+		} catch (Exception ex) { 
 			return createErrorResponse(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		return updateDepartment(id, department);
@@ -150,7 +153,7 @@ public class DepartmentController extends BaseController {
 	@GetMapping(value = "/paging")
 	public List<Department> showDepartment(@RequestParam("pageNumber") int pageNumber,
 			@RequestParam("pageSize") int pageSize) {
-		List<Department> depart = departmentService.findAllPaging(pageNumber, pageSize);
+		List<Department> depart = departmentService.findAllPaging(pageSize, pageNumber);
 		try {
 
 			if (depart != null) {

@@ -8,11 +8,12 @@ public interface DepartmentService {
 	  List<Department> findALL();
 	  Department addDepartment(Department department);
 	  Department update(long id ,Department department);
-	  List<Department> detailsDepartment(long id);
+	  List<Department> getDepartment(long id);
 	  List<Department> findAllPaging(int pageNumber, int pageSize);
 	  Department delete(long id);
-	  List<Department> layDanhSach(String name, String address, long code,long id);
-	  List<Department> detailsDepartmentByTen(String name);
-	  List<Department> detailsDepartmentByCode(long code);
-	  List<Department> detailsDepartmentByAddress(String address);
+
+	  List<Department> getDepartmentByTen(String name);
+	  List<Department> getDepartmentByCode(long code);
+	  List<Department> getDepartmentByAddress(String address);
+	  List<Department> getResult(long id, long is_delete, String name, String address, long status, int pageSize,int pageNumber);
 } 

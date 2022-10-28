@@ -16,5 +16,9 @@ public interface DepartmentRepositoryCustom {
 	List<Department> findByAddress(String address);
 
 	List<Department> findByCode(long code);
+
+	List<Department> fillByAll(long id, long is_delete, String name, String address, long status, int pageNumber,
+			int pageSize);
+
     
 }

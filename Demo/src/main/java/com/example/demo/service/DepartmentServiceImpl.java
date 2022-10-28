@@ -29,20 +29,9 @@ public class DepartmentServiceImpl implements DepartmentService{
         @PersistenceContext 
         private EntityManager em;
         @Override
-        public List<Department> layDanhSach(String name, String address ,long code,long id) {
+        public List<Department> getResult(long id , long is_delete,String name, String address , long status ,int pageSize , int pageNumber) {
             List<Department> result = new ArrayList<>();
-                if (id>0) {
-                	result.addAll(departmentRepository.getDetails(id));
-                }
-                if (name!=null) {
-                	result.addAll(departmentRepository.getDetailsByTen(name));            
-                }
-                if(address!=null ) {
-                    result.addAll(departmentRepository.getDetailsByAddress(address));
-                }
-                if(code>=0) {
-                	result.addAll(departmentRepository.getDetailsByCode(code));
-                }
+                result.addAll(departmentRepository.fillByAll(id,is_delete,name,address, status, pageNumber, pageSize));
                 Set<Department> set = new LinkedHashSet<Department>(result);
                 List<Department> results = new ArrayList<Department>(set);
             
@@ -70,7 +59,7 @@ public class DepartmentServiceImpl implements DepartmentService{
 					    department.setCode(a.getCode());
 					    department.setAddress(a.getAddress());
 					    department.setPath(a.getPath());
-					    department.setStt(a.getStt());
+					    department.setStatus(a.getStatus());
 					    department.setIs_delete(a.getIs_delete());
 					    department.setP_id(a.getP_id());
 					    return departmentRepository.save(department);
@@ -83,7 +72,7 @@ public class DepartmentServiceImpl implements DepartmentService{
 			return null;
 		}
 		@Override
-		public List<Department> detailsDepartment(long id) {
+		public List<Department> getDepartment(long id) {
 			List<Department> listDepartment = new ArrayList<>(); 
 			listDepartment=departmentRepository.getDetails(id);
 			if (listDepartment.isEmpty()) {
@@ -91,7 +80,7 @@ public class DepartmentServiceImpl implements DepartmentService{
 			}
 			return listDepartment;
 		}
-		public List<Department> detailsDepartmentByTen(String name) {
+		public List<Department> getDepartmentByTen(String name) {
 			List<Department> listDepartment = new ArrayList<>(); 
 			listDepartment=departmentRepository.getDetailsByTen(name);
 			if (listDepartment.isEmpty()) {
@@ -99,7 +88,7 @@ public class DepartmentServiceImpl implements DepartmentService{
 			}
 			return listDepartment;
 		}
-		public List<Department> detailsDepartmentByCode(long code) {
+		public List<Department> getDepartmentByCode(long code) {
 			List<Department> listDepartment = new ArrayList<>(); 
 			listDepartment=departmentRepository.getDetailsByCode(code);
 			if (listDepartment.isEmpty()) {
@@ -107,7 +96,7 @@ public class DepartmentServiceImpl implements DepartmentService{
 			}
 			return listDepartment;
 		}
-		public List<Department> detailsDepartmentByAddress(String address) {
+		public List<Department> getDepartmentByAddress(String address) {
 			List<Department> listDepartment = new ArrayList<>(); 
 			listDepartment=departmentRepository.getDetailsByAddress(address);
 			if (listDepartment.isEmpty()) {

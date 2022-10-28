@@ -39,7 +39,7 @@ public class Department {
 	private long path;
 	
 	@Column(name="STATUS",length = 255)
-	private long stt;
+	private long status;
 	@Column(name="IS_DELETE")
 	private long is_delete;
 	@Column(name = "CREATOR_DATE", nullable = true)
@@ -74,11 +74,11 @@ public class Department {
 	public void setPath(long path) {
 		this.path = path;
 	}
-	public long getStt() {
-		return stt;
+	public long getStatus() {
+		return status;
 	}
-	public void setStt(long stt) {
-		this.stt = stt;
+	public void setStatus(long status) {
+		this.status = status;
 	}
 	public long getIs_delete() {
 		return is_delete;
@@ -96,7 +96,7 @@ public class Department {
 	@Override
 	public String toString() {
 		return "Department [id=" + id + ", name=" + name + ", address=" + address + ", code=" + code + ", p_id=" + p_id
-				+ ", path=" + path + ", stt=" + stt + ", is_delete=" + is_delete + ", createdDate=" + createdDate + "]";
+				+ ", path=" + path + ", stt=" + status + ", is_delete=" + is_delete + ", createdDate=" + createdDate + "]";
 	}
 	
 	
