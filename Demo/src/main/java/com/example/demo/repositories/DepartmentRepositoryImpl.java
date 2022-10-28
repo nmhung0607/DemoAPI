@@ -84,21 +84,27 @@ public class DepartmentRepositoryImpl implements DepartmentRepositoryCustom {
 	@Override
 	public List<Department> fillByAll(long id , long is_delete ,String name, String address, long status,int pageNumber, int pageSize) {
 		    List<Department> result = new ArrayList<>();
-			String sql = " select n from Department n where n.id = :id and n.status = :status and n.is_delete = :is_delete and :address is null or lower(n.address) like :lowerAddress and :name is null or lower(n.name) like :lowerName";
+			String sql = " select n from Department n where n.id = :id and n.status = :status and n.is_delete = :is_delete and :address is null or lower(n.address) like concat ('%',:lowerAddress,'%') and :name is null or lower(n.name) like concat ('%',:lowerName,'%')";
 			Query query = em.createQuery(sql);
-			String lowerName=name.toLowerCase();
-			String lowerAddress=address.toLowerCase();
-			query.setParameter("lowerName",lowerName);
+		    String lowerName=lowerCase(name);
+		    String lowerAddress=lowerCase(address);
+		    query.setParameter("lowerName",lowerName);
 			query.setParameter("lowerAddress",lowerAddress);
-			query.setParameter("status",status);
 			query.setParameter("is_delete",is_delete);
 			query.setParameter("id",id);
 			query.setParameter("name",name);
 			query.setParameter("address",address);
+			query.setParameter("status",status);
 			query.setFirstResult((pageNumber - 1) * pageSize);// phan trang, lay tu phan tu thu 0 trong list,
 																// max lay 10 phan tu
 			query.setMaxResults(pageSize);
 			result = query.getResultList();
 		return result;
+	}
+	public String lowerCase (String a) {
+		if (a!=null) {
+		  return a.toLowerCase();
+		}
+		return null;
 	}
 }
