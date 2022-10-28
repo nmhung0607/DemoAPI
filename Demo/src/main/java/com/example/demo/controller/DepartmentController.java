@@ -73,7 +73,7 @@ public class DepartmentController extends BaseController {
 	@GetMapping(value = "/find/department/id")
 	public ResponseEntity<ResponseJson> findDepartment(@PathVariable("id") long id) {
 		try {
-			List<Department> department = departmentService.getDepartment(id);
+			Department department = departmentService.getDepartment(id);
 			if (department != null) {
 				return createSuccessResponse(department, HttpStatus.OK);
 			}
@@ -86,7 +86,7 @@ public class DepartmentController extends BaseController {
 	@GetMapping(value = "/find/department/name")
 	public ResponseEntity<ResponseJson> findByTenDepartment(@RequestParam("name") String name) {
 		try {
-			List<Department> department=departmentService.getDepartmentByTen(name);
+			Department department=departmentService.getDepartmentByTen(name);
 			if(department!=null) {
 				return createSuccessResponse(department, HttpStatus.OK);
 			}
@@ -99,7 +99,7 @@ public class DepartmentController extends BaseController {
 	@GetMapping(value = "/find/department/code")
 	public ResponseEntity<ResponseJson> findByCodeDepartment(@PathVariable("code") long code) {
 		try {
-			List<Department> department=departmentService.getDepartmentByCode(code);
+			Department department=departmentService.getDepartmentByCode(code);
 			if(department!=null) {
 				return createSuccessResponse(department, HttpStatus.OK);
 			}
@@ -112,7 +112,7 @@ public class DepartmentController extends BaseController {
 	@GetMapping(value = "/find/department/address")
 	public ResponseEntity<ResponseJson> findByAddressDepartment(@RequestParam("address") String address) {
 		try {
-			List<Department> department=departmentService.getDepartmentByAddress(address);
+			Department department=departmentService.getDepartmentByAddress(address);
 			if(department!=null) {
 				return createSuccessResponse(department, HttpStatus.OK);
 			}

@@ -23,12 +23,12 @@ public interface DepartmentRepository  extends JpaRepository<Department, Long>,D
 //	 @Query(value = "select * from DON_VI n where n.DE_NAME like :name escape '/' ", nativeQuery = true)
 //	 List<Department> getByTen(@Param("name") String name);
 	 @Query(value = "select n from Department n where n.id=:id")
-	 List<Department> getDetails(@RequestParam("id") long id);
+	 Department getDetails(@RequestParam("id") long id);
 	 @Query(value = "select n from Department n where n.name like :name")
-	 List<Department> getDetailsByTen(@RequestParam("name") String name);
+	 Department getDetailsByTen(@RequestParam("name") String name);
 	 @Query(value = "select n from Department n where n.code=:code")
-	 List<Department> getDetailsByCode(@RequestParam("code") long code);
+	 Department getDetailsByCode(@RequestParam("code") long code);
 	 @Query(value = "select n from Department n where n.address like :address")
-	 List<Department> getDetailsByAddress(@RequestParam("address") String address);
+	 Department getDetailsByAddress(@RequestParam("address") String address);
 	 
 }

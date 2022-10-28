@@ -72,37 +72,24 @@ public class DepartmentServiceImpl implements DepartmentService{
 			return null;
 		}
 		@Override
-		public List<Department> getDepartment(long id) {
-			List<Department> listDepartment = new ArrayList<>(); 
-			listDepartment=departmentRepository.getDetails(id);
-			if (listDepartment.isEmpty()) {
-				return null;
-			}
-			return listDepartment;
+		public Department getDepartment(long id) {
+			
+			return departmentRepository.getDetails(id);
+			
 		}
-		public List<Department> getDepartmentByTen(String name) {
-			List<Department> listDepartment = new ArrayList<>(); 
-			listDepartment=departmentRepository.getDetailsByTen(name);
-			if (listDepartment.isEmpty()) {
-				return null;
-			}
-			return listDepartment;
+		public Department getDepartmentByTen(String name) {
+		
+			return departmentRepository.getDetailsByTen(name);
+			
 		}
-		public List<Department> getDepartmentByCode(long code) {
-			List<Department> listDepartment = new ArrayList<>(); 
-			listDepartment=departmentRepository.getDetailsByCode(code);
-			if (listDepartment.isEmpty()) {
-				return null;
-			}
-			return listDepartment;
+		public Department getDepartmentByCode(long code) {
+
+			return departmentRepository.getDetailsByCode(code);
+			
 		}
-		public List<Department> getDepartmentByAddress(String address) {
-			List<Department> listDepartment = new ArrayList<>(); 
-			listDepartment=departmentRepository.getDetailsByAddress(address);
-			if (listDepartment.isEmpty()) {
-				return null;
-			}
-			return listDepartment;
+		public Department getDepartmentByAddress(String address) {
+			return departmentRepository.getDetailsByAddress(address);
+		
 		}
 		@Override
 		public Department delete(long id) {
